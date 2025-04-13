@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diabetes Risk Prediction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header>
+        <h1>Diabetes Risk Prediction Tool</h1>
+        <p>Enter your health information to check your diabetes risk</p>
+      </header>
+
+      <main>
+        <!-- Left Box - Input Form -->
+        <section class="input-section">
+          <div class="card">
+            <h2>Health Information</h2>
+            <form id="prediction-form">
+              <div class="form-group">
+                <label for="age">Age:</label>
+                <input
+                  type="number"
+                  id="age"
+                  name="age"
+                  min="18"
+                  max="100"
+                  placeholder="18-100"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="bmi">BMI (Body Mass Index):</label>
+                <input
+                  type="number"
+                  id="bmi"
+                  name="bmi"
+                  min="10"
+                  max="50"
+                  step="0.1"
+                  placeholder="Normal: 18.5-24.9"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="HbA1c_level">HbA1c Level:</label>
+                <input
+                  type="number"
+                  id="HbA1c_level"
+                  name="HbA1c_level"
+                  min="3.0"
+                  max="10.0"
+                  step="0.1"
+                  placeholder="Normal: <5.7"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="blood_glucose_level">Blood Glucose Level:</label>
+                <input
+                  type="number"
+                  id="blood_glucose_level"
+                  name="blood_glucose_level"
+                  min="50"
+                  max="300"
+                  placeholder="Normal: <140"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="hypertension">Hypertension:</label>
+                <select id="hypertension" name="hypertension" required>
+                  <option value="0">No</option>
+                  <option value="1">Yes</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="heart_disease">Heart Disease:</label>
+                <select id="heart_disease" name="heart_disease" required>
+                  <option value="0">No</option>
+                  <option value="1">Yes</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                  <option value="0">Female</option>
+                  <option value="1">Male</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="smoking_history">Smoking History:</label>
+                <select id="smoking_history" name="smoking_history" required>
+                  <option value="never">Never</option>
+                  <option value="current">Current</option>
+                  <option value="former">Former</option>
+                  <option value="ever">Ever</option>
+                  <option value="not_current">Not Current</option>
+                  <option value="no_info">No Information</option>
+                </select>
+              </div>
+
+              <div class="button-group">
+                <button type="submit" id="predict-button">Predict</button>
+                <button type="button" id="reset-button">Reset</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- Right Box - Results Display -->
+        <section class="result-section">
+          <div class="card" id="result-card">
+            <h2>Prediction Result</h2>
+            <div id="loading" class="hidden">
+              <div class="spinner"></div>
+              <p>Analyzing your data...</p>
+            </div>
+            <div id="result-content">
+              <p id="initial-message">
+                Enter your health information and click Predict
+              </p>
+              <div id="prediction-result" class="hidden fade-in">
+                <h3 id="prediction-text"></h3>
+                <p id="probability-text"></p>
+                <div id="risk-meter">
+                  <div class="risk-bar">
+                    <div id="risk-indicator"></div>
+                  </div>
+                  <div class="risk-labels">
+                    <span>Low Risk</span>
+                    <span>High Risk</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Disclaimer Text -->
+            <p class="disclaimer hidden" id="disclaimer-text">
+              This prediction is generated by AI and is not 100% accurate.
+              Please consult a healthcare professional for a definitive
+              diagnosis.
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Footer with Copyright and Social Icons -->
+    <footer class="footer">
+      <div class="footer-content">
+        <span class="copyright"
+          >© 2025 This platform was developed by Hamidreza Taghipour</span
+        >
+        <div class="social-icons">
+          <a
+            href="https://www.linkedin.com/in/hamidrezataghipour/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="{{ url_for('static', filename='images/linkedin_icon.png') }}"
+              alt="LinkedIn Profile"
+              class="social-icon"
+            />
+          </a>
+          <a
+            href="https://github.com/hamidrezataghipour"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="{{ url_for('static', filename='images/github_icon.png') }}"
+              alt="GitHub Profile"
+              class="social-icon"
+            />
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>
